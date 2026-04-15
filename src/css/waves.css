@@ -1,0 +1,18 @@
+.wave-back {
+  animation: waveSlow 15s linear infinite;
+}
+.wave-middle {
+  animation: waveSlow 10s linear infinite reverse;
+}
+.wave-front {
+  animation: waveSlow 5s linear infinite;
+}
+
+@keyframes waveSlow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-80px);
+  }
+}
