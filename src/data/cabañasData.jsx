@@ -7,6 +7,8 @@ import foto6 from "../Cabañas/Foto6.jpg";
 import foto7 from "../Cabañas/Foto7.jpg";
 import foto8 from "../Cabañas/Foto8.jpg";
 
+
+
 const photos = [foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8];
 
 const cabañasData = [

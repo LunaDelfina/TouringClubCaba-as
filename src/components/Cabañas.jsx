@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CabanaGallery from "./SubComponents/CabañaGallery.jsx";
+import CabanaGallery from "./SubComponents/CabañaGaleriaImagenes.jsx";
 import Datos from "./SubComponents/DatosCabaña.jsx";
 import cabañasData from "../data/cabañasData.jsx";
 
@@ -35,7 +35,7 @@ const Cabañas = () => {
   return (
     <section className="h-screen snap-start overflow-hidden bg-[#D8C4A5] flex items-center justify-center relative">
 
-      <div className="flex items-center gap-4 w-[75%] max-w-5xl mx-auto">
+      <div className="flex items-center gap-4 w-[95%] max-w-7xl mx-auto">
 
         {/* Flecha izquierda */}
         <button
@@ -46,21 +46,25 @@ const Cabañas = () => {
         </button>
 
         {/* Card */}
-        <div className="flex-1 bg-white rounded-[28px] overflow-hidden flex shadow-[0_8px_48px_rgba(80,40,10,0.13)] h-[75vh]">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={cabin.id}
-              className="flex w-full h-full bg-white rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.13)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <CabanaGallery photos={cabin.photos} />
-              <Datos cabin={cabin} index={activeCabin} total={cabañasData.length} />
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        <div className="flex-1 bg-white rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.13)] h-[85vh]">
+  <AnimatePresence mode="wait" custom={direction}>
+    <motion.div
+      key={cabin.id}
+      className="w-full h-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    >
+      <CabanaGallery
+        photos={cabin.photos}
+        cabin={cabin}
+        index={activeCabin}
+        total={cabañasData.length}
+      />
+    </motion.div>
+  </AnimatePresence>
+</div>
 
         {/* Flecha derecha */}
         <button

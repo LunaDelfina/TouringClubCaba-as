@@ -1,5 +1,11 @@
 import check from "../../icons/check.png";
+import people from "../../icons/people.png";
+import bed from "../../icons/bedroom.png";
+import ac from "../../icons/AC.png";
+import tv from "../../icons/people.png";
+import bathroom from "../../icons/people.png";
 
+const featuresIcons = [people, bed, ac, tv, bathroom];
 
 const Datos = ({ cabin, index, total }) => {
   return (
@@ -7,7 +13,7 @@ const Datos = ({ cabin, index, total }) => {
 
       {/* TÍTULO */}
       <div className="mb-4">
-        <p className="text-xs tracking-[0.2em] text-[#F55809] uppercase font-sans mb-2">
+        <p className="text-4xl tracking-[0.2em] text-[#F55809] uppercase font-sans mb-2">
           Cabaña {index + 1} de {total}
         </p>
         <h1 className="titulo-playfair text-[#7D6239] text-[2.2rem] font-bold">
@@ -26,7 +32,7 @@ const Datos = ({ cabin, index, total }) => {
       <div className="flex flex-col gap-2 mb-4">
         {cabin.features.map((item, i) => (
           <div key={i} className="flex gap-2 items-center">
-            <img src={check} alt="check" className="w-4 h-4 object-contain" />
+            <img src={featuresIcons[i]} alt="check" className="w-4 h-4 object-contain" />
             <span className="text-[#6E6E6E] text-[0.875rem]">{item}</span>
           </div>
         ))}

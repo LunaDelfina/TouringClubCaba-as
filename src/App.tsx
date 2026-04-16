@@ -1,4 +1,4 @@
-import "./index.css";
+
 import Hero from "./components/Hero.jsx";
 import Complejo from "./components/complejo.jsx";
 import Cabañas from "./components/Cabañas.jsx";
@@ -8,6 +8,8 @@ import Actividades from "./components/actividades.jsx";
 import Opiniones from "./components/Opiniones.jsx";
 import Encontranos from "./components/Encontranos.jsx";
 import Footer from "./Footer.jsx";
+
+import CTA from "./components/CTASection.jsx"
 
 function App() {
   return (
@@ -19,8 +21,7 @@ function App() {
       <Galeria />
       <Actividades />
       <Opiniones /> 
-      <TransitionWave />
-      <Encontranos />
+      <CTA/>
       <Footer />
       
 
