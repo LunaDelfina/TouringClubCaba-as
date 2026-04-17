@@ -33,13 +33,13 @@ const Complejo = () => {
   return (
     <section 
     id="Complejo"
-      className="relative h-screen snap-start overflow-x-visible flex flex-col items-center justify-center"
+      className="relative h-[100dvh] snap-start overflow-x-visible flex flex-col items-center justify-center"
       style={{
         background: "linear-gradient(180deg, #F3FEFF 0%, #EFE6D8 49.52%, #D8C4A5 90.38%)",
       }}
     >
       <Backg />
-      <div className="relative z-10 w-[60%] max-w-5xl mx-auto flex flex-col gap-4">
+      <div className="relative z-10 w-[90%] md:w-[60%] max-w-5xl mx-auto flex flex-col gap-4">
         <ComplejoCard images={complejoImages} hoveredImage={hoveredImage} />
         <FeatureChips features={features} onHover={setHoveredImage} />
       </div>

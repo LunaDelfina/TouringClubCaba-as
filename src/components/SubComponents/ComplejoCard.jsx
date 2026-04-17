@@ -29,15 +29,15 @@ const ComplejoCard = ({ images, hoveredImage }) => {
   }, [hoveredImage]);
 
   return (
-    <div className="grid grid-cols-2 gap-0 rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.10)] max-h-[60vh]">
+    <div className="flex flex-wrap-reverse md:grid md:grid-cols-2 gap-0 rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.10)] max-h-[60vh]">
 
       {/* Texto */}
       <motion.div className="bg-white flex flex-col justify-center px-8 py-6" {...fadeUp}>
-        <p className="text-xs tracking-[0.22em] text-[#F55809] uppercase font-sans mb-3">
+        <p className="text-xs tracking-[0.22em] text-[#F55809] uppercase font-sans mb-1 md:mb-3">
           El complejo
         </p>
-        <h2 className="titulo-playfair text-[#7D6239] text-4xl font-bold italic leading-tight mb-3">
-          Naturaleza, comodidad <br />y sierras
+        <h2 className="titulo-playfair text-[#7D6239] text-3xl md:text-4xl font-bold italic leading-tight mb-3">
+          Naturaleza, comodidad y sierras
         </h2>
         <div className="h-[4px] w-10 rounded-full bg-gradient-to-r from-[#CC2329] to-[#F55809] mb-4" />
         <p className="text-[#6E6E6E] text-[0.88rem] leading-relaxed font-light">
@@ -45,18 +45,18 @@ const ComplejoCard = ({ images, hoveredImage }) => {
           naturaleza y comodidad para que disfrutes una estadía única, ya sea en
           familia, con amigos o en pareja.
         </p>
-        <div className="text-[#F27507] flex gap-6 mt-6 font-light text-sm">
+        <div className="text-[#F27507] grid grid-cols-3 mt-6 font-light text-sm border-t border-[#F27507]/20 pt-4">
           {[
             { stat: "+1000", label: "Clientes felices" },
-            { stat: "★4.9",  label: "En opiniones" },
-            { stat: "+20",   label: "Años de experiencia" },
+            { stat: "★4.9", label: "En opiniones" },
+            { stat: "+20", label: "Años de experiencia" },
           ].map(({ stat, label }, i) => (
-            <div key={label} className="flex gap-6 items-center">
-              {i > 0 && <div className="border-l border-[#F27507] h-8" />}
-              <div>
-                <h3 className="text-2xl font-medium">{stat}</h3>
-                <p>{label}</p>
-              </div>
+            <div
+              key={label}
+              className={`flex flex-col items-center text-center ${i > 0 ? "border-l border-[#F27507]/30" : ""}`}
+            >
+              <h3 className="text-lg md:text-2xl font-medium">{stat}</h3>
+              <p className="text-[10px] md:text-xs leading-tight">{label}</p>
             </div>
           ))}
         </div>

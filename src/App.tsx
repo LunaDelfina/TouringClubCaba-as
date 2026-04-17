@@ -13,7 +13,7 @@ import CTA from "./components/CTASection.jsx"
 
 function App() {
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory overflow-x-hidden scrollbar-hide ">
       <Hero />
       <Complejo />
       <Cabañas />

@@ -3,7 +3,7 @@ const BackgroundWaves = () => {
     <svg
       viewBox="0 0 1440 220"
       preserveAspectRatio="none"
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      className="absolute inset-0 w-full h-full pointer-events-none z-0 pointer-events-none "
     >
       {[...Array(17)].map((_, i) => (
         <g key={i} transform={`translate(0 ${i * 12})`}>
