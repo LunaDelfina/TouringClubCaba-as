@@ -1,4 +1,4 @@
-import Navbar from "./Navbar.jsx";
+import Navbar from "./SubComponents/Navbar.jsx";
 import Titles from "./SubComponents/Titles.jsx";
 import Waves from "./waves.jsx";
 import bg from "../img/hero-bg.jpg";

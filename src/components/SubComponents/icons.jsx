@@ -5,7 +5,7 @@ import Facebook from "../../icons/facebook-w.png";
 
 const Iconos = () => {
   return (
-    <div className="absolute flex flex-col gap-[1vh] left-[10vh]">
+    <div className="absolute flex gap-[1vh]">
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
         <img src={Instagram} alt="Instagram" />
       </a>

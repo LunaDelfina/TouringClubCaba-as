@@ -1,4 +1,4 @@
-import Iconos from "./icons.jsx";
+
 import { motion } from "motion/react"
 import FadeContent from '../ReactBits/FadeContentHero.jsx'
 
@@ -14,7 +14,7 @@ const Principal = () => {
         viewport={{ once: false }}
         transition={{ duration: 0.5 }}
       >
-        <Iconos />
+      
       </motion.div>
 
       <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>

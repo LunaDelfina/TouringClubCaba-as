@@ -20,6 +20,7 @@ const CTA = () => {
 
     return (
         <section
+        id="Contactanos"
             ref={sectionRef}
             className="relative h-screen snap-start flex flex-col items-center justify-center"
             style={{

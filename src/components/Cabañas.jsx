@@ -33,7 +33,9 @@ const Cabañas = () => {
   const cabin = cabañasData[activeCabin];
 
   return (
-    <section className="h-screen snap-start overflow-hidden bg-[#D8C4A5] flex items-center justify-center relative">
+    <section 
+    id="Cabañas"
+      className="h-screen snap-start overflow-hidden bg-[#D8C4A5] flex items-center justify-center relative">
 
       <div className="flex items-center gap-4 w-[95%] max-w-7xl mx-auto">
 

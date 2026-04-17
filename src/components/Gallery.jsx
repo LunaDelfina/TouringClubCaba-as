@@ -85,7 +85,10 @@ const Galeria = () => {
   }, [isInView]);
 
   return (
-    <section ref={ref} className="h-screen snap-start overflow-hidden relative bg-white flex flex-col items-center justify-center gap-6">
+    <section
+    id="Fotos"
+    ref={ref} 
+    className="h-screen snap-start overflow-hidden relative bg-white flex flex-col items-center justify-center gap-6">
 
   {/* SVGs igual que antes */}
   {/* SVG derecha */}
