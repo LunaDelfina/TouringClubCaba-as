@@ -39,7 +39,7 @@ const Complejo = () => {
       }}
     >
       <Backg />
-      <div className="relative z-10 w-[90%] md:w-[60%] max-w-5xl mx-auto flex flex-col gap-4">
+      <div className="relative z-10 w-[90%] md:w-[75%] max-w-5xl mx-auto flex flex-col gap-4">
         <ComplejoCard images={complejoImages} hoveredImage={hoveredImage} />
         <FeatureChips features={features} onHover={setHoveredImage} />
       </div>

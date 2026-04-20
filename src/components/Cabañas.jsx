@@ -1,96 +1,100 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CabanaGallery from "./SubComponents/CabañaGaleriaImagenes.jsx";
-import Datos from "./SubComponents/DatosCabaña.jsx";
+import CabanasSelecter from "./SubComponents/CabañasSelecter.jsx";
 import cabañasData from "../data/cabañasData.jsx";
-
-const ChevronLeft = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-    <path d="M15 18l-6-6 6-6" />
-  </svg>
-);
-
-const ChevronRight = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-    <path d="M9 18l6-6-6-6" />
-  </svg>
-);
 
 const Cabañas = () => {
   const [activeCabin, setActiveCabin] = useState(0);
   const [direction, setDirection] = useState(1);
+  const touchStartX = useRef(null);
 
   const prev = () => {
     setDirection(-1);
-    setActiveCabin((p) => (p === 0 ? cabañasData.length - 1 : p - 1));
+    setActiveCabin(p => p === 0 ? cabañasData.length - 1 : p - 1);
   };
 
   const next = () => {
     setDirection(1);
-    setActiveCabin((p) => (p === cabañasData.length - 1 ? 0 : p + 1));
+    setActiveCabin(p => p === cabañasData.length - 1 ? 0 : p + 1);
+  };
+
+  const onSelect = (i) => {
+    setDirection(i > activeCabin ? 1 : -1);
+    setActiveCabin(i);
+  };
+
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40) next();
+    if (diff < -40) prev();
+    touchStartX.current = null;
   };
 
   const cabin = cabañasData[activeCabin];
 
   return (
-    <section 
-    id="Cabañas"
-      className="h-screen snap-start overflow-hidden bg-[#D8C4A5] flex items-center justify-center relative">
-
-      <div className="flex items-center gap-4 w-[95%] max-w-7xl mx-auto">
-
-        {/* Flecha izquierda */}
-        <button
-          onClick={prev}
-          className="flex-shrink-0 bg-white/70 hover:bg-white text-[#7D6239] rounded-full w-12 h-12 flex items-center justify-center shadow-md backdrop-blur-sm transition-all duration-200 hover:scale-105"
-        >
-          <ChevronLeft />
-        </button>
+    <section
+      id="Cabañas"
+      className="h-[100dvh] snap-start overflow-hidden bg-[#D8C4A5] flex flex-col items-center justify-center relative gap-4"
+    >
+      <div className="flex items-center gap-4  w-[90%] md:w-[75%] max-w-5xl  md:max-h-[85dvh] max-h-[80dvh] mx-auto flex-1">
 
         {/* Card */}
-        <div className="flex-1 bg-white rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.13)] h-[85vh]">
-  <AnimatePresence mode="wait" custom={direction}>
-    <motion.div
-      key={cabin.id}
-      className="w-full h-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-    >
-      <CabanaGallery
-        photos={cabin.photos}
-        cabin={cabin}
-        index={activeCabin}
-        total={cabañasData.length}
-      />
-    </motion.div>
-  </AnimatePresence>
-</div>
+        <div className="flex-1 bg-[#1a120a] rounded-[28px] overflow-hidden shadow-[0_8px_48px_rgba(80,40,10,0.13)] h-full">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={cabin.id}
+              className="w-full h-full flex"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              {/* Panel lateral — solo desktop */}
+              <CabanasSelecter
+                data={cabañasData}
+                activeCabin={activeCabin}
+                onSelect={onSelect}
+                className="hidden md:flex"
+              />
 
-        {/* Flecha derecha */}
-        <button
-          onClick={next}
-          className="flex-shrink-0 bg-white/70 hover:bg-white text-[#7D6239] rounded-full w-12 h-12 flex items-center justify-center shadow-md backdrop-blur-sm transition-all duration-200 hover:scale-105"
-        >
-          <ChevronRight />
-        </button>
+              {/* Galería con swipe en mobile */}
+              <div
+                className="flex-1 h-full"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+              >
+                <CabanaGallery
+                  photos={cabin.photos}
+                  cabin={cabin}
+                  index={activeCabin}
+                  total={cabañasData.length}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
       </div>
 
-      {/* Dots navegación cabañas */}
-      <div className="absolute bottom-8 flex gap-2 w-fit  p-2 rounded-full bg-white">
-        {cabañasData.map((_, i) => (
+      {/* Dots mobile — solo se ven en mobile */}
+      <div className="md:hidden flex gap-2 items-center bg-white/80 backdrop-blur-sm px-3 py-2 rounded-full">
+        {cabañasData.map((cab, i) => (
           <button
             key={i}
-            onClick={() => { setDirection(i > activeCabin ? 1 : -1); setActiveCabin(i); }}
-            className={`rounded-full transition-all duration-300
-              
-              ${i === activeCabin
-                ? "w-6 h-2.5 bg-gradient-to-r from-[#F27507] to-[#CC2329]"
-                : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
-              }`}
-          />
+            onClick={() => onSelect(i)}
+            className="flex items-center gap-1.5 transition-all duration-300"
+          >
+            <div className={`rounded-full transition-all duration-300 ${
+              i === activeCabin
+                ? "w-5 h-2 bg-gradient-to-r from-[#F27507] to-[#CC2329]"
+                : "w-2 h-2 bg-gray-300"
+            }`} />
+            
+          </button>
         ))}
       </div>
 

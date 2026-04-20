@@ -11,7 +11,7 @@ const Hero = () => {
       <img src={bg} className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0"
       style={{
-  background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.25) 100%)"
+  background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.25) 100%)"
 }} ></div>
 
       <div className="relative z-10 h-[100vh]">

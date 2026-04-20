@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import Wave from "../DecorationComponents/wavecircle.svg";
+
 
 import Foto1 from "../Cabañas/Foto1.png";
 import Foto2 from "../Cabañas/Foto2.png";
@@ -49,10 +49,10 @@ const FilaCarrusel = ({ fotos, speed }) => {
   useCarrusel(trackRef, speed);
   return (
     <div className="relative w-full overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
-        style={{ width: FADE_WIDTH, background: "linear-gradient(to right, #fff, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
-        style={{ width: FADE_WIDTH, background: "linear-gradient(to left, #fff, transparent)" }} />
+      <div className="absolute left-0 top-0 bottom-0 w-[20px] md:w-[120px] z-10 pointer-events-none"
+        style={{  background: "linear-gradient(to right, #fff, transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0  w-[20px] md:w-[120px] z-10 pointer-events-none"
+        style={{  background: "linear-gradient(to left, #fff, transparent)" }} />
       <div ref={trackRef} className="flex gap-3 w-max">
         {fotos.map((src, i) => (
           <div key={i} className="h-[220px] flex-shrink-0 rounded-[14px] overflow-hidden group">
@@ -74,63 +74,36 @@ const Galeria = () => {
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const [phase, setPhase] = useState("hidden");
 
-  useEffect(() => {
-    if (isInView) {
-      setPhase("big");
-      const timer = setTimeout(() => setPhase("small"), 1800);
-      return () => clearTimeout(timer);
-    } else {
-      setPhase("hidden");
-    }
-  }, [isInView]);
+useEffect(() => {
+  if (isInView) {
+    setPhase("small");
+  } else {
+    setPhase("hidden");
+  }
+}, [isInView]);
 
   return (
     <section
     id="Fotos"
     ref={ref} 
-    className="h-screen snap-start overflow-hidden relative bg-white flex flex-col items-center justify-center gap-6">
+    className="h-[100dvh] snap-start overflow-hidden relative bg-white flex flex-col items-center justify-center gap-6">
 
-  {/* SVGs igual que antes */}
-  {/* SVG derecha */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <motion.div
-          className="absolute"
-          style={{ top: '-100%', right: '-65vw' }}
-          initial={{ opacity: 0, x: 200 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 200 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <img src={Wave} className="w-[110vw] animate-spin-slow" style={{ transformOrigin: 'center center' }} />
-        </motion.div>
-      </div>
-
-      {/* SVG izquierda */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <motion.div
-          className="absolute"
-          style={{ top: '-20%', left: '-60vw' }}
-          initial={{ opacity: 0, x: -200 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <img src={Wave} className="w-[120vw] animate-spin-slow-reverse" style={{ transformOrigin: 'center center' }} />
-        </motion.div>
-      </div>
-
+  
+    <div className=" md:max-h-[65dvh] max-h-[85dvh] w-[90%] md:w-[75%] max-w-5xl mx-auto flex flex-col items-center justify-center gap-6">
   {/* Título */}
   <motion.div
     className="z-10 text-center"
-    animate={
-      phase === "hidden" ? { opacity: 0, y: 20, scale: 1.4 } :
-      phase === "big"    ? { opacity: 1, y: 0,  scale: 1.4 } :
-                           { opacity: 1, y: 0,  scale: 1    }
-    }
-    transition={{ duration: 0.7, ease: "easeInOut" }}
+    animate={phase === "small" ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+    
+    transition={{ duration: 0.5, ease: "easeInOut" }}
   >
-    <h1 className="titulo-playfair font-semibold text-[#7D6239] text-[2rem]">
+    <p className="text-xs tracking-[0.22em] text-[#F55809] uppercase font-sans mb-1 ">
+          Galeria
+        </p>
+    <h1 className="titulo-playfair font-bold italic text-[#7D6239] text-[2rem]">
       ¿Te quedaste con ganas de ver más?
     </h1>
-    <div className="h-[5px] w-[3rem] mx-auto rounded-full bg-gradient-to-r from-[#CC2329] to-[#F55809] mt-2" />
+    <div className="h-[5px]  w-[3rem] mx-auto rounded-full bg-gradient-to-r from-[#CC2329] to-[#F55809] mt-2" />
   </motion.div>
 
   {/* Filas */}
@@ -142,6 +115,7 @@ const Galeria = () => {
     <FilaCarrusel fotos={fila1} speed={0.6}  />
     <FilaCarrusel fotos={fila2} speed={-0.5} />
   </motion.div>
+  </div>
 
 </section>
   );

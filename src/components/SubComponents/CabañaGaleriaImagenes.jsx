@@ -23,24 +23,23 @@ const iconos = {
     </svg>
   ),
   bano: (
-  <svg viewBox="0 0 24 24" fill="none" stroke="#F27507" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-    <path d="M9 6 L9 12" />
-    <path d="M9 6 Q9 4 11 4 Q13 4 13 6" />
-    <path d="M2 12 H22 V14 Q22 18 18 18 H6 Q2 18 2 14 Z" />
-    <path d="M6 18 L5 21" />
-    <path d="M18 18 L19 21" />
-  </svg>
-),
+    <svg viewBox="0 0 24 24" fill="none" stroke="#F27507" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+      <path d="M9 6 L9 12" />
+      <path d="M9 6 Q9 4 11 4 Q13 4 13 6" />
+      <path d="M2 12 H22 V14 Q22 18 18 18 H6 Q2 18 2 14 Z" />
+      <path d="M6 18 L5 21" />
+      <path d="M18 18 L19 21" />
+    </svg>
+  ),
 };
 
-// Mapea cada feature text → ícono correspondiente
 const getIcono = (label) => {
   const l = label.toLowerCase();
-  if (l.includes("persona"))   return iconos.personas;
+  if (l.includes("persona"))    return iconos.personas;
   if (l.includes("dormitorio")) return iconos.cama;
-  if (l.includes("aire"))      return iconos.ac;
-  if (l.includes("tv"))        return iconos.tv;
-  if (l.includes("baño"))      return iconos.bano;
+  if (l.includes("aire"))       return iconos.ac;
+  if (l.includes("tv"))         return iconos.tv;
+  if (l.includes("baño"))       return iconos.bano;
   return null;
 };
 
@@ -66,43 +65,37 @@ const CabinGallery = ({ photos = [], cabin, index, total }) => {
       <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/50 to-transparent z-10" />
 
       {/* Overlay inferior */}
-      <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-[#140a04]/95 via-[#140a04]/70 to-transparent z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#140a04]/95 via-[#140a04]/70 to-transparent z-10" />
 
-      {/* Top bar — badge + dots galería */}
-      <div className="absolute top-0 inset-x-0 px-5 py-4 flex items-center justify-between z-20">
-        <div className="flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5">
-          <span className="text-white text-[11px] font-medium">{photos.length} fotos</span>
-          <div className="w-px h-3 bg-white/30" />
-          <span className="text-white text-[11px] font-medium">{cabin?.name}</span>
-        </div>
-
+      {/* Dots — arriba a la derecha */}
+      <div className="absolute top-0 inset-x-0 px-5 py-4 flex justify-end z-20">
         <div className="flex gap-1.5 items-center">
           {photos.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
               className={`rounded-full transition-all duration-300 ${
-                i === active
-                  ? "w-4 h-1.5 bg-white"
-                  : "w-1.5 h-1.5 bg-white/40"
+                i === active ? "w-4 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/40"
               }`}
             />
           ))}
         </div>
       </div>
 
-      {/* Flechas galería */}
+      {/* Flecha izquierda */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/15 backdrop-blur-sm border border-white/25 text-white rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200 hover:bg-white/30 z-20"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/15 backdrop-blur-sm border border-white/25 text-white rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200 hover:bg-white/30"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
+
+      {/* Flecha derecha */}
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/15 backdrop-blur-sm border border-white/25 text-white rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200 hover:bg-white/30 z-20"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/15 backdrop-blur-sm border border-white/25 text-white rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200 hover:bg-white/30"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
           <path d="M9 18l6-6-6-6" />
@@ -110,27 +103,23 @@ const CabinGallery = ({ photos = [], cabin, index, total }) => {
       </button>
 
       {/* Info panel */}
-      <div className="absolute inset-x-0 bottom-0 px-7 pb-6 z-20">
-
-        <p className="text-[10px] tracking-[0.2em] text-[#F27507] uppercase mb-2">
+      <div className="absolute inset-x-0 bottom-0 px-5 pb-4 z-20">
+        <p className="text-[9px] tracking-[0.2em] text-[#F27507] uppercase mb-1">
           Cabaña {index + 1} de {total}
         </p>
-        <h2 className="titulo-playfair text-white text-4xl font-bold italic leading-tight mb-3">
+        <h2 className="titulo-playfair text-white text-2xl font-bold italic leading-tight mb-1">
           {cabin?.name}
         </h2>
-        <p className="text-white/60 text-[0.88rem] leading-relaxed font-light mb-4 max-w-lg">
+        <p className="text-white/60 text-[0.75rem] leading-relaxed font-light mb-2 max-w-lg">
           {cabin?.description}
         </p>
 
         {/* Features pills */}
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {cabin?.features.map((feat, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-full px-3 py-1"
-            >
+            <div key={i} className="flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-2 py-0.5">
               {getIcono(feat)}
-              <span className="text-white/85 text-[12px]">{feat}</span>
+              <span className="text-white/85 text-[10px]">{feat}</span>
             </div>
           ))}
         </div>
@@ -138,17 +127,18 @@ const CabinGallery = ({ photos = [], cabin, index, total }) => {
         {/* Precio + botón */}
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[#F27507] text-[1.8rem] font-extrabold leading-none">
+            <p className="text-[#F27507] text-[1.4rem] font-extrabold leading-none">
               {cabin?.price}
             </p>
-            <p className="text-white/40 text-[10px] mt-1">por noche</p>
+            <p className="text-white/40 text-[9px] mt-0.5">por noche</p>
           </div>
-          <button className="text-white text-[0.88rem] font-semibold rounded-[11px] px-6 py-2.5 transition-all hover:opacity-90 hover:-translate-y-px"
-            style={{ background: "linear-gradient(90deg,#F27507,#CC2329)" }}>
+          <button
+            className="text-white text-[0.8rem] font-semibold rounded-[10px] px-4 py-2 transition-all hover:opacity-90 hover:-translate-y-px"
+            style={{ background: "linear-gradient(90deg,#F27507,#CC2329)" }}
+          >
             Reservar ahora
           </button>
         </div>
-
       </div>
 
     </div>
